@@ -143,7 +143,7 @@ namespace Qrcode
             // 
             this.lblmessage.AutoSize = true;
             this.lblmessage.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblmessage.Location = new System.Drawing.Point(539, 599);
+            this.lblmessage.Location = new System.Drawing.Point(591, 597);
             this.lblmessage.Name = "lblmessage";
             this.lblmessage.Size = new System.Drawing.Size(73, 32);
             this.lblmessage.TabIndex = 7;
@@ -153,7 +153,7 @@ namespace Qrcode
             // 
             this.progressBar1.Location = new System.Drawing.Point(5, 590);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(528, 51);
+            this.progressBar1.Size = new System.Drawing.Size(580, 53);
             this.progressBar1.TabIndex = 8;
             // 
             // Form1

@@ -24,16 +24,37 @@ namespace Qrcode
             progressBar1.Style = ProgressBarStyle.Marquee;
             _BackgroundWorker.DoWork += BackgroundWorker_DoWork;
             _BackgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+            //_BackgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
         }
+
+        //private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        //{
+        //    lblmessage.Text = string.Format("SAVING......{0}%", e.ProgressPercentage);
+        //    progressBar1.Update();
+        //}
+
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBar1.Hide();
+            if (MessageBox.Show("TẠO FILE THÀNH CÔNG. BẠN CÓ MUỐN MỞ FILE?", "CREAT PDF", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes && File.Exists(path))
+            {
+                lblmessage.Text = "COMPLETE!";
+                Process.Start(path);
+            }
         }
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            using (FrmReport frmReport = new FrmReport(this.appData1.QrData))
+            try
             {
-                frmReport.SaveToPdf(path);
+                using (FrmReport frmReport = new FrmReport(this.appData1.QrData))
+                {
+                    frmReport.SaveToPdf(path);
+                }
+            }
+            catch(Exception ex)
+            {
+                _BackgroundWorker.CancelAsync();
+                _ = MessageBox.Show("TẠO FILE KHÔNG THÀNH CÔNG!" + Environment.NewLine + ex);
             }
         }                
         private void Form1_Load(object sender, EventArgs e)
@@ -50,6 +71,7 @@ namespace Qrcode
         }
         private void BtnPath_Click(object sender, EventArgs e)
         {
+            lblmessage.Text = "";
             Openfile();
         }
         private async void BtnImport_Click(object sender, EventArgs e)
@@ -76,29 +98,19 @@ namespace Qrcode
         }
         private void BtnExport_Click(object sender, EventArgs e)
         {
-            try
+            if (!_BackgroundWorker.IsBusy)
             {
-                //MessageBox.Show("NÚT NÀY PHẢI CÓ CAFE MỚI ĐƯỢC!", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 using (SaveFileDialog savefile = new SaveFileDialog() { Filter = "File PDF(*.pdf)|*.pdf", ValidateNames = true })
                 {
                     if (savefile.ShowDialog() == DialogResult.OK)
                     {
-                        lblmessage.Text = "PROCESSING......!";
-                        lblmessage.Refresh();
+                        lblmessage.Text = "SAVING......!";
+                        //lblmessage.Refresh();
                         path = savefile.FileName;
                         progressBar1.Show();
                         _BackgroundWorker.RunWorkerAsync();
-                        if (MessageBox.Show("TẠO FILE THÀNH CÔNG. BẠN CÓ MUỐN MỞ FILE?", "CREAT PDF", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes && File.Exists(path))
-                        {
-                            lblmessage.Text = "COMPLETE!";
-                            Process.Start(path);
-                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                _ = MessageBox.Show("TẠO FILE KHÔNG THÀNH CÔNG!" + Environment.NewLine + ex);
             }
         }
         private void Openfile()
