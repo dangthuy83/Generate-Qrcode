@@ -59,6 +59,7 @@ namespace Qrcode
         }                
         private void Form1_Load(object sender, EventArgs e)
         {
+            BtnExport.Enabled = false;
             BtnImport.Enabled = false;
             lblmessage.Text = "";
         }
@@ -81,6 +82,7 @@ namespace Qrcode
             await Task.Run(() => ImpDataToDataTable(TxtPath.Text));
             await Task.Run(() => GenerateQrcode());
             dataGridView1.DataSource = appData1.Tables[0];
+            BtnExport.Enabled = true;
         }
         private void BtnPreview_Click(object sender, EventArgs e)
         {
