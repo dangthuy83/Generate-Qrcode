@@ -29,6 +29,7 @@ namespace Qrcode
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.TxtPath = new System.Windows.Forms.TextBox();
             this.BtnPath = new System.Windows.Forms.Button();
@@ -171,9 +172,10 @@ namespace Qrcode
             this.Controls.Add(this.BtnPath);
             this.Controls.Add(this.TxtPath);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Generate Qrcode";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.appData1)).EndInit();

@@ -31,10 +31,10 @@ namespace Qrcode
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmReport));
             this.QrDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AppData = new Qrcode.AppData();
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.QrDataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AppData)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +61,6 @@ namespace Qrcode
             this.reportViewer.ServerReport.BearerToken = null;
             this.reportViewer.Size = new System.Drawing.Size(848, 928);
             this.reportViewer.TabIndex = 0;
-            //this.reportViewer.RenderingBegin += new System.ComponentModel.CancelEventHandler(this.reportViewer_RenderingBegin);
             // 
             // FrmReport
             // 
@@ -69,6 +68,7 @@ namespace Qrcode
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(848, 928);
             this.Controls.Add(this.reportViewer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Preview";
@@ -84,6 +84,5 @@ namespace Qrcode
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
         private System.Windows.Forms.BindingSource QrDataBindingSource;
         private AppData AppData;
-        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
